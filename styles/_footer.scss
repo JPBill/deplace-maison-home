@@ -1,0 +1,273 @@
+@import "./colors";
+@import "./main";
+@import "./media-queries";
+
+footer {
+  z-index: 100 !important;
+  background: rgba(0, 0, 0, 0.01);
+  width: 100vw;
+  padding: 10vh 2.5vw 5vh 2.5vw;
+  position: relative;
+  height: fit-content;
+
+  @include mini {
+    padding: 10vh 5vw 5vh 5vw;
+  }
+
+  .first-footer-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .newsletter {
+      @include phoneS {
+        max-width: 80px;
+      }
+      p {
+        text-transform: uppercase;
+        font-size: 1rem;
+        font-weight: 500;
+
+        @include mini {
+          font-size: 0.9rem;
+        }
+
+        @include phone {
+          font-size: 0.55rem;
+        }
+      }
+
+      img {
+        width: 3rem;
+        margin-top: 10px;
+
+        @include mini {
+          width: 2.5rem;
+        }
+
+        @include phone {
+          font-size: 2rem;
+        }
+      }
+    }
+
+    .ul-container {
+      p {
+        text-transform: uppercase;
+
+        @include phone {
+          font-size: 0.6rem;
+        }
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+
+        li {
+          margin: 10px 0;
+          @include fromDownOnHover;
+          height: 1.5rem;
+
+          @include phone {
+            margin: 5px 0;
+            height: 0.8rem;
+          }
+
+          @include phoneS {
+            height: 0.65rem;
+          }
+
+          a {
+            text-decoration: none;
+            color: $black;
+            font-weight: 600;
+            font-size: 1.5rem;
+
+            @include mini {
+              font-size: 1.2rem;
+            }
+
+            @include phone {
+              font-size: 0.8rem;
+              font-weight: 500;
+            }
+
+            @include phoneS {
+              font-size: 0.65rem;
+            }
+          }
+        }
+      }
+    }
+
+    > a {
+      img {
+        width: 60px;
+        transform: rotate(-90deg);
+        border-radius: 50%;
+        border: 2px solid black;
+        padding: 0.5rem;
+        transition: transform 500ms ease;
+
+        @include phone {
+          width: 30px;
+          border-width: 1px;
+        }
+
+        &:hover {
+          transform: rotate(-450deg);
+          transition: transform 500ms ease;
+        }
+      }
+    }
+  }
+
+  .second-footer-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-top: 13vh;
+    justify-content: space-between;
+
+    .email-container {
+      label {
+        font-weight: 500;
+        font-size: 0.7rem;
+
+        @include mini {
+          font-size: 0.6rem;
+        }
+
+        @include phone {
+          font-size: 0.5rem;
+        }
+      }
+      .email-submit-container {
+        display: flex;
+        align-items: flex-end;
+        border-bottom: 1px solid $black;
+        justify-content: space-between;
+
+        input {
+          border: none;
+          outline: none;
+          padding: 1rem 1rem 1rem 0;
+          min-width: 200px;
+          width: 20vw;
+          background-color: transparent;
+
+          @include mini {
+            padding: 0.5rem 0.5rem 0.5rem 0;
+          }
+
+          @include phone {
+            min-width: 80px;
+            width: 80px;
+            max-width: 80px;
+            padding: 0.25rem 0.25rem 0.25rem 0;
+          }
+
+          &::placeholder {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: rgb(151, 151, 151);
+
+            @include mini {
+              font-size: 0.75rem;
+            }
+
+            @include phone {
+              font-size: 0.5rem;
+              font-weight: 500;
+            }
+          }
+        }
+
+        button {
+          border: none;
+          outline: none;
+          text-transform: uppercase;
+          font-weight: 500;
+          background-color: transparent;
+          padding: 1rem 0 1rem 1rem;
+          cursor: pointer;
+
+          @include mini {
+            font-size: 0.75rem;
+            padding: 0.5rem 0 0.5rem 0.5rem;
+          }
+
+          @include phone {
+            font-size: 0.5rem;
+            padding: 0.25rem 0 0.25rem 0.25rem;
+          }
+        }
+      }
+    }
+
+    & > a {
+      text-decoration: none;
+      color: $black;
+      text-transform: uppercase;
+      font-weight: 500;
+
+      @include mini {
+        font-size: 0.75rem;
+      }
+
+      @include phone {
+        font-size: 0.5rem;
+      }
+
+      @include phoneS {
+        font-size: 0.4rem;
+      }
+    }
+
+    .copyright {
+      font-weight: 500;
+
+      @include mini {
+        font-size: 0.75rem;
+      }
+
+      @include phone {
+        font-size: 0.5rem;
+      }
+
+      @include phoneS {
+        font-size: 0.4rem;
+      }
+    }
+
+    .social-footer-container {
+      display: flex;
+      align-items: center;
+
+      a {
+        text-decoration: none;
+        color: $black;
+        font-size: 2rem;
+
+        @include mini {
+          font-size: 1rem;
+        }
+
+        @include phoneS {
+          font-size: 0.7rem;
+        }
+      }
+
+      a:first-of-type {
+        margin-right: 15px;
+
+        @include phone {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

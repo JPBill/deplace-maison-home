@@ -1,0 +1,933 @@
+@import "./colors";
+@import "./media-queries";
+
+@mixin fromDownOnHover {
+  height: 1rem;
+  width: fit-content;
+  overflow: hidden;
+  transition: all 350ms;
+  display: flex;
+  flex-direction: column;
+
+  &:hover a {
+    transform: translateY(-100%);
+    transition: all 350ms;
+  }
+  a {
+    font-size: 1rem;
+    text-decoration: none;
+    color: $black;
+    display: inline-block;
+    font-weight: 500;
+
+    @include mini {
+      transition-delay: 500ms;
+    }
+  }
+
+  @include mini {
+    &:hover a {
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin tagContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: $black;
+    font-weight: 500;
+
+    img {
+      margin-left: 15px;
+      width: 60px;
+      padding: 0.5rem;
+      border-radius: 50%;
+      border: 2px solid $black;
+      transition: all 350ms ease;
+
+      @include phone {
+        width: 40px;
+      }
+
+      &:hover {
+        transform: rotate(360deg);
+        transition: all 350ms ease;
+      }
+    }
+  }
+}
+
+.main-page {
+  position: relative;
+  z-index: 2;
+  width: 100vw;
+  min-height: 100vh;
+  background: $white;
+  padding-top: 10vh;
+
+  @include phone {
+    padding-top: 10vh;
+  }
+
+  .ink-mode {
+    position: absolute;
+    left: 50%;
+    top: 5vh;
+    transform: translateX(-50%);
+
+    a {
+      width: fit-content;
+      text-decoration: none;
+      color: $black;
+      display: inline-block;
+      padding: 0.2rem;
+      background: $pink;
+      font-family: "Akronim", cursive;
+    }
+    @include mini {
+      display: none;
+    }
+  }
+
+  .fixed-ink {
+    position: fixed;
+    animation: inkFromTop 0.5s ease forwards;
+    z-index: 100;
+  }
+
+  .logo {
+    position: fixed;
+    top: 20vh;
+    left: -2.5vw;
+    transform: rotate(-90deg) translateY(0%);
+    @include fromDownOnHover;
+
+    @include mini {
+      position: absolute;
+      transform: rotate(0) translateY(0);
+      top: 5vh;
+      left: 5vw;
+    }
+
+    @include phone {
+      height: 0.8rem;
+    }
+
+    @include phoneS {
+      height: 0.7rem;
+    }
+
+    a {
+      @include phone {
+        font-size: 0.8rem;
+      }
+
+      @include phoneS {
+        font-size: 0.7rem;
+      }
+    }
+  }
+
+  .burger {
+    cursor: pointer;
+    position: absolute;
+    top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+
+    @include mini {
+      display: block;
+    }
+
+    div {
+      height: 1.5px;
+      background: $black;
+      margin: 5px 0;
+      transition: all 500ms ease;
+    }
+
+    .line1 {
+      width: 16.5px;
+      position: absolute;
+      left: 0;
+      top: -6px;
+    }
+
+    .line2 {
+      height: 2px;
+      width: 30px;
+      position: relative;
+    }
+
+    .line3 {
+      width: 16.5px;
+      position: absolute;
+      right: 0;
+      top: 6px;
+    }
+  }
+
+  .toggle div {
+    transition: all 500ms ease;
+    background: $white;
+  }
+
+  .toggle .line1 {
+    transform: rotate(45deg) translate(0px, -1px);
+  }
+
+  .toggle .line2 {
+    transform: rotate(-45deg);
+    height: 1.5px;
+  }
+
+  .toggle .line3 {
+    transform: rotate(45deg);
+  }
+
+  .burger,
+  .logo,
+  .cart {
+    z-index: 105;
+  }
+
+  .cart {
+    position: fixed;
+    top: 5vh;
+    right: 5vw;
+    @include fromDownOnHover;
+
+    @include mini {
+      right: 10vw;
+      position: absolute;
+    }
+    a {
+      font-weight: 400;
+      font-size: 0.9rem;
+      text-decoration: none;
+      color: $black;
+    }
+
+    span {
+      font-weight: 800;
+    }
+  }
+
+  .mini-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0vh;
+    left: 2.5vw;
+    margin-bottom: 2rem;
+
+    @include mini {
+      display: none;
+    }
+
+    li {
+      height: 0.8rem;
+      margin: 5px 0;
+      @include fromDownOnHover;
+      a {
+        text-decoration: none;
+        color: $black;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: block;
+      }
+    }
+  }
+
+  nav {
+    height: 0;
+    width: 100vw;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 1000ms ease;
+    transition-delay: 500ms;
+    z-index: 100;
+
+    @include mini {
+      display: flex;
+      flex-direction: column;
+      background: $black;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-left: 5vw;
+      padding-right: 5vw;
+    }
+
+    h2 {
+      position: relative;
+      color: $white;
+      margin-top: 30vh;
+      font-size: 1rem;
+      font-weight: 500;
+
+      @include phone {
+        margin-top: 15vh;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 0%;
+        height: 1px;
+        background: $white;
+        z-index: 20;
+        transition: all 500ms ease;
+      }
+    }
+
+    .before-expand::before {
+      width: 100%;
+      transition: all 1500ms ease;
+      transition-delay: 1000ms;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      margin-top: 50px;
+
+      li {
+        a {
+          text-decoration: none;
+          color: $white;
+          font-weight: 600;
+          font-size: 2.3rem;
+        }
+      }
+    }
+
+    & > h2,
+    .nav-links,
+    .grid-list,
+    .social-container,
+    .nav-ink-mode {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: all 1000ms ease;
+    }
+
+    .nav-links-hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .grid-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      list-style: none;
+      margin-top: 50px;
+      grid-gap: 20px;
+
+      li {
+        a {
+          text-decoration: none;
+          color: $white;
+          font-size: 1.3rem;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .social-container {
+      position: absolute;
+      bottom: 0;
+      left: 5vw;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 2vh;
+
+      @include phone {
+        bottom: 15vh;
+      }
+
+      a {
+        i {
+          text-decoration: none;
+          color: $white;
+          font-size: 2.5rem;
+        }
+      }
+
+      a:last-of-type {
+        margin-left: 15px;
+      }
+    }
+
+    .nav-ink-mode {
+      position: absolute;
+      bottom: 0;
+      margin-bottom: 2vh;
+      right: 15vw;
+
+      @include phone {
+        bottom: 15vh;
+      }
+
+      a {
+        color: $white;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      img {
+        width: 40px;
+        margin-bottom: 20px;
+        transform: rotate(-90deg);
+      }
+    }
+  }
+
+  .show-nav {
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+    transition: all 1000ms ease;
+    transition-delay: 500ms;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    & > h2,
+    .nav-links,
+    .grid-list,
+    .social-container,
+    .nav-ink-mode {
+      opacity: 1;
+      pointer-events: all;
+      visibility: visible;
+      transition: all 1000ms ease;
+      transition-delay: 1000ms;
+    }
+  }
+
+  .header-container {
+    width: 70vw;
+    margin: 0 5vw 0 25vw;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-20vh);
+
+    @include mini {
+      transform: translateY(0);
+    }
+
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      width: 100%;
+
+      h1 {
+        font-size: 11rem;
+        font-weight: 500;
+        line-height: 140px;
+
+        @include miniLaptop {
+          font-size: 9rem;
+        }
+
+        @include mini {
+          font-size: 5rem;
+          line-height: normal;
+        }
+
+        @include phone {
+          font-size: 3rem;
+        }
+
+        @include fold {
+          font-size: 2rem;
+        }
+      }
+
+      .summer-container {
+        display: flex;
+        justify-content: flex-end;
+
+        .heading-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-left: 20px;
+
+          h2 {
+            font-weight: 600;
+            font-size: 2rem;
+
+            @include phone {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+    }
+
+    .images-container {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 50px;
+      width: 100%;
+
+      .image-container {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+
+        img {
+          border: 2px solid black;
+          width: 100%;
+        }
+
+        .span-container {
+          position: relative;
+
+          span {
+            font-size: 0.9rem;
+          }
+
+          span:last-of-type {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+      }
+    }
+
+    .explore-container {
+      margin-top: 80px;
+      @include tagContainer;
+    }
+  }
+
+  main {
+    #rssBlock {
+      margin-top: 100px;
+
+      @include phone {
+        margin-top: 40px;
+      }
+      marquee {
+        padding: 1rem 0;
+        background: $white;
+        color: $black;
+        background: $yellow;
+        border: 2px solid $black;
+
+        & > div {
+          display: flex;
+          flex-direction: row;
+          font-weight: 600;
+          font-size: 2rem;
+
+          @include phone {
+            font-size: 1.3rem;
+          }
+
+          .item {
+            margin: 0 30px;
+            list-style: square;
+          }
+        }
+      }
+    }
+
+    #who-are-we {
+      position: relative;
+      width: 70vw;
+      margin: 200px 5vw 100px 25vw;
+      display: flex;
+      justify-content: flex-end;
+
+      @include phone {
+        margin-top: 100px;
+      }
+
+      h2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 1.3rem;
+        font-weight: 500;
+        transform: translateY(50%);
+        border-bottom: 1px solid $black;
+
+        @include mini {
+          font-size: 1rem;
+        }
+
+        @include phone {
+          transform: translateY(0);
+          font-size: 0.9rem;
+        }
+
+        @include phoneS {
+          font-size: 0.7rem;
+        }
+      }
+
+      p {
+        font-size: 3rem;
+        font-weight: 600;
+        text-indent: 35%;
+
+        @include mini {
+          font-size: 2rem;
+        }
+
+        @include phone {
+          font-size: 0.9rem;
+          text-indent: 45%;
+          font-weight: 500;
+        }
+
+        a {
+          color: $black;
+        }
+      }
+    }
+
+    .slider-container {
+      display: inline-flex;
+      overflow: hidden;
+      transform: translateX(0);
+      transition: transform 0.3s ease-in-out;
+      cursor: grab;
+      margin-left: 25vw;
+      margin-bottom: 80px;
+
+      .slide {
+        width: 25vw;
+        border: 2px solid $black;
+        user-select: none;
+        margin: 0 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: $pink;
+
+        @include phone {
+          margin: 0 5px;
+          border: 1px solid $black;
+        }
+
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+
+        span {
+          font-family: "Akronim", cursive;
+          width: 70px;
+
+          @include phone {
+            font-size: 0.8rem;
+            width: 50px;
+          }
+        }
+
+        small {
+          margin: 5px 0;
+        }
+
+        h2 {
+          font-weight: 600;
+          font-size: 3.8rem;
+          text-align: center;
+
+          @include miniLaptop {
+            font-size: 2.5rem;
+          }
+
+          @include tablet {
+            font-size: 2rem;
+          }
+
+          @include phone {
+            font-size: 1rem;
+          }
+        }
+
+        .line-through {
+          text-decoration: line-through;
+          font-size: 1.3rem;
+
+          @include phone {
+            font-size: 0.8rem;
+          }
+        }
+
+        .casual {
+          font-size: 1.5rem;
+          font-weight: 500;
+          padding-bottom: 30px;
+
+          @include phone {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+
+    .shop-container {
+      width: 70vw;
+      margin: 0 5vw 0 25vw;
+      @include tagContainer;
+    }
+
+    .grabbing {
+      cursor: grabbing;
+    }
+
+    #reviews {
+      position: relative;
+      display: flex;
+      justify-content: flex-start;
+      width: 700px;
+      min-width: 50vw;
+      margin: 20vh 5vw 20vh auto;
+      align-items: center;
+      min-height: 200px;
+      height: fit-content;
+
+      @include tablet {
+        width: 90vw;
+        margin: 8vh 5vw 8vh auto;
+      }
+
+      @include phone {
+        width: 95vw;
+        margin: 8vh 0 8vh 5vw;
+      }
+
+      img {
+        width: 110px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+
+        @include fold {
+          width: 80px;
+        }
+      }
+
+      .authors {
+        position: relative;
+        z-index: 4;
+        min-width: 230px;
+        height: 2.6rem;
+        overflow: hidden;
+        transition: all 350ms;
+        display: flex;
+        flex-direction: column;
+
+        @include tablet {
+          min-width: 180px;
+        }
+
+        @include phone {
+          min-width: 110px;
+          height: 1.4rem;
+        }
+
+        @include phoneS {
+          min-width: 90px;
+          height: 1rem;
+        }
+
+        h1 {
+          position: relative;
+          font-size: 2.5rem;
+          color: $black;
+          font-weight: 600;
+          font-family: "Akronim", cursive;
+
+          @include mini {
+            transition-delay: 500ms;
+            font-size: 1.8rem;
+          }
+
+          @include phone {
+            font-size: 1.3rem;
+          }
+
+          @include phoneS {
+            font-size: 1rem;
+          }
+        }
+        .move-to-zero {
+          transform: translateY(0);
+          transition: transform 300ms ease;
+        }
+
+        .move-to-minus-one-hundred {
+          transform: translateY(-100%);
+          transition: transform 300ms ease;
+        }
+      }
+
+      .comments {
+        position: relative;
+        transform: translateY(30px);
+
+        @include phone {
+          margin-left: 10px;
+        }
+
+        @include fold {
+          margin-left: 0;
+        }
+      }
+
+      //here
+      .comment {
+        position: relative;
+        z-index: 4;
+        width: 350px;
+        min-width: 30vw;
+        height: 120px;
+        overflow: hidden;
+        transition: all 350ms;
+        display: flex;
+        flex-direction: column;
+
+        @include phone {
+          width: 220px;
+        }
+
+        p {
+          position: absolute;
+          height: 120px;
+          font-size: clamp(0.7rem, 1vw+1, 1vw);
+
+          &.first-comment {
+            top: 0;
+            left: 0;
+          }
+
+          &.second-comment {
+            top: 100%;
+            left: 0;
+          }
+        }
+        .move-to-zero {
+          transform: translateY(0);
+          transition: transform 300ms ease;
+        }
+
+        .move-to-minus-one-hundred {
+          transform: translateY(-100%);
+          transition: transform 300ms ease;
+        }
+      }
+    }
+  }
+}
+
+/* important */
+.fade-in {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+/* important */
+.fade-in.appear {
+  opacity: 1;
+}
+/* important */
+.from-left {
+  transform: translateX(-50%);
+}
+/* important */
+.from-right {
+  transform: translateX(50%);
+}
+.from-down {
+  transform: translateY(100px);
+}
+.from-up.appear {
+  transform: translateY(0);
+}
+.from-up {
+  transform: translateY(-100px);
+}
+.from-down.appear {
+  transform: translateY(0);
+}
+/* important */
+.from-left,
+.from-right,
+.from-down,
+.from-up {
+  transition: transform 500ms ease-in;
+}
+/* important */
+.from-left.appear,
+.from-right.appear {
+  transform: translateX(0);
+}
+
+.white-color a {
+  color: $white !important;
+  transition: all 500ms ease;
+  transition-delay: 15000ms;
+}
+
+.hide-fixed-nav {
+  display: none !important;
+}
+
+@keyframes xd {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+}
+
+@keyframes inkFromTop {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 5vh;
+    opacity: 1;
+  }
+}

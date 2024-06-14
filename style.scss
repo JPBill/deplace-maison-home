@@ -1,0 +1,65 @@
+@import './styles/colors';
+@import './styles/media-queries';
+@import './styles/footer';
+@import './styles/main';
+@import './styles/header';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+}
+body {
+  background: $white;
+  overflow-x: hidden;
+  overflow-y: scroll; /* add the ability to scroll */
+  scrollbar-width: none; /* firefox */
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.html-overflow-hidden {
+  overflow: hidden;
+}
+
+.cursor {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: transform 350ms ease;
+  transform: translate(-50%, -50%) scale(0.3);
+  transition-delay: 100ms;
+  z-index: 1000;
+  animation: cursorAnimation 1s infinite forwards alternate;
+  @include mini {
+    display: none;
+  }
+}
+
+@keyframes cursorAnimation {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(5deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(15deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.95) rotate(5deg);
+  }
+}
